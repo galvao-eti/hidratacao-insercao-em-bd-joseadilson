@@ -1,6 +1,6 @@
 <?php
 
-namespace Trabalho
+namespace Trabalho;
 
 class Usuario {
 
@@ -23,6 +23,20 @@ class Usuario {
         $this->senha = $senha;
     }
 
+    public function salvar($bd) {
+        $sql    = "INSERT INTO USUARIO (EMAIL, SENHA) VALUES (:EMAIL, :SENHA)";
+        $stmt   = $bd->prepare($sql);
+        $result = $stmt->execute(
+            array(
+                ':EMAIL' => $this->email,
+                ':SENHA' => $this->senha
+            ));
+
+        return $result;
+    }
+
     use Traits\Hidratacao;
     
 }
+
+

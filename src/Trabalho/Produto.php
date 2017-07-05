@@ -1,6 +1,6 @@
 <?php
 
-namespace Trabalho
+namespace Trabalho;
 
 class Produto {
 
@@ -23,6 +23,25 @@ class Produto {
         $this->valor = $valor;
     }
 
+    public function salvar($bd) {
+        $sql    = "INSERT INTO PRODUTO (NOME, VALOR) VALUES (:NOME, :VALOR)";
+        $stmt   = $bd->prepare($sql);
+        $result = $stmt->execute(
+            array(
+                ':NOME'  => $this->nome,
+                ':VALOR' => $this->valor
+            ));
+
+        return $result;
+    }
+
     use Traits\Hidratacao;
 
 }
+
+
+
+
+
+
+
